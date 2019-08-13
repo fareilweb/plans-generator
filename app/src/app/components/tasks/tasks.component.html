@@ -1,0 +1,56 @@
+<div class="tasks">
+    <mat-icon class="float-left icon-big">work</mat-icon>
+    <h2><span i18n>Tasks</span></h2>
+
+    <div class="row">
+        <div class="col-4">
+            <h3 i18n>Actions</h3>
+            <div class="action-forms m15">
+                <form #taskForm = "ngForm">
+                    <mat-form-field class="w100">
+                        <input matInput i18n-placeholder placeholder="Name" name="name" [(ngModel)]="SelectedTask.Name">
+                    </mat-form-field>                
+					<table class="w100">
+		              <tr class="w100">
+		                <td class="w50">
+		                  <button mat-button (click)="CreateNewTask()">
+		                    <mat-icon>add</mat-icon> <span class="ml5" i18n>Add</span>
+		                  </button>
+		                </td>
+		                <td class="w50">
+		                  <button mat-raised-button color="primary" class="display-block w100" (click)="AddOrUpdateTask()">
+		                    <mat-icon>save</mat-icon><span class="ml5" i18n>Save</span>
+		                  </button>
+		                </td>
+		              </tr>
+		            </table>
+                </form>
+            </div>
+        </div>
+        <div class="col-8">
+            <h3 i18n>Tasks already entered</h3>
+            <table class="data-table">
+                <tr>
+                    <th></th>
+                    <th><span i18n>Id</span></th>
+                    <th><span i18n>Name</span></th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let task of Tasks" [ngClass]="{'selected': SelectedTask.Id == task.Id}">
+                    <td>
+                      <button mat-button (click)="SelectTask(task)">
+                        <mat-icon>select_all</mat-icon>
+                      </button>
+                    </td>
+                    <td>{{task.Id}}</td>
+                    <td>{{task.Name}}</td>
+                    <td>
+                      <button mat-button (click)="DeleteTask(task)">
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="top-bar row">
+    <div class="col-1 col-menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/" routerLinkActive="active">
+          <mat-icon>home</mat-icon>
+          <span i18n>Dashboard</span>
+        </button>
+        <button mat-menu-item routerLink="/tasks">
+          <mat-icon>work</mat-icon>
+          <span i18n>Tasks</span>
+        </button>
+        <button mat-menu-item routerLink="/persons">
+          <mat-icon>face</mat-icon>
+          <span i18n>Persons</span>
+        </button>
+        <button mat-menu-item routerLink="/events">
+          <mat-icon>event</mat-icon>
+          <span i18n>Events</span>
+        </button>
+        <button mat-menu-item routerLink="/generator">
+          <mat-icon>calendar_today</mat-icon>
+          <span i18n>Generator</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="col-11 col-heading">
+      <h1 i18n>Programs Generator</h1>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <app-notifications></app-notifications>
+    <router-outlet></router-outlet>
+  </div>
+</div>

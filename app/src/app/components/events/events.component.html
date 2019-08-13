@@ -1,0 +1,69 @@
+<div class="events">
+  <mat-icon class="float-left icon-big">event</mat-icon>
+  <h2><span i18n>Events</span></h2>
+
+  <div class="row">
+    <div class="col-4">
+      <h3 i18n>Actions</h3>
+      <div class="action-forms m15">
+        <form #eventForm="ngForm">
+          <mat-form-field class="w100">
+            <input matInput i18n-placeholder placeholder="Name" name="name" [(ngModel)]="SelectedEvent.Name">
+          </mat-form-field>
+
+          <mat-checkbox name="is_periodic" [(ngModel)]="SelectedEvent.IsPeriodic" class="w100">
+            <span i18n>Is Periodic</span>
+          </mat-checkbox>
+
+          
+          
+          <div class="gap20"></div>
+
+          <!-- Add/Save Actions -->
+          <div class="controls-area">
+            <table class="w100">
+              <tr class="w100">
+                <td class="w50">
+                  <button mat-button (click)="CreateNewEvent()">
+                    <mat-icon>add</mat-icon> <span class="ml5" i18n>Add</span>
+                  </button>
+                </td>
+                <td class="w50">
+                  <button mat-raised-button color="primary" class="display-block w100" (click)="AddOrUpdateEvent()">
+                    <mat-icon>save</mat-icon><span class="ml5" i18n>Save</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="col-8">
+      <h3 i18n>Events</h3>
+      <table class="data-table">
+        <tr>
+          <th></th>
+          <th><span i18n>Id</span></th>
+          <th><span i18n>Name</span></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let event of Events" [ngClass]="{'selected': SelectedEvent.Id == event.Id}">
+          <td>
+            <button mat-button (click)="SelectEvent(event)">
+              <mat-icon>select_all</mat-icon>
+            </button>
+          </td>
+          <td>{{event.Id}}</td>
+          <td>{{event.Name}}</td>
+          <td>
+            <button mat-button (click)="DeleteEvent(event)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

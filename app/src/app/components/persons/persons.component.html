@@ -1,0 +1,129 @@
+<div id="persons">
+  <mat-icon class="float-left icon-big">face</mat-icon>
+  <h2><span i18n>Persons</span></h2>
+
+  <div class="row">
+    <div class="col-4">
+      <h3 i18n>Actions</h3>
+      <div class="action-forms p15">
+        <form #personForm="ngForm">
+
+          <!-- Name -->
+          <div class="controls-area">
+            <mat-form-field class="w100">
+              <input matInput i18n-placeholder placeholder="Name" name="name" [(ngModel)]="SelectedPerson.Name">
+            </mat-form-field>
+          </div>
+
+          <!-- Availability -->
+          <div *ngIf="IsPersonSelected" class="controls-area">
+            <!-- <mat-checkbox name="ABoolVar" [(ngModel)]="SelectedPerson.ABoolVal">
+              <span i18n>Available for first event</span>
+            </mat-checkbox> -->
+          </div>
+
+          <!-- Tasks Assignment -->
+          <div *ngIf="IsPersonSelected" class="controls-area">
+            <label><b><span i18n>Assigned tasks</span></b></label>
+            <div class="gap10"></div>
+            <table>
+              <tr>
+                <td>
+                  <mat-form-field>
+                      <mat-label>Available Tasks</mat-label>
+                      <mat-select [(value)]="TaskToAddId">
+                        <mat-option *ngFor="let task of AvailableTasks" [value]="task.Id">
+                          {{task.Name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                  <button mat-button color="primary" [disabled]="TaskToAddId == null" class="float-right" (click)="AssignTask()">
+                    <mat-icon>add</mat-icon><span i18n>Assign</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+            <div *ngFor="let task of SelectedPerson.AssignedTasks" class="w100">
+              <div>{{task.Name}} <button mat-button (click)="RemoveTask(task)"><mat-icon>delete_forever</mat-icon></button></div>
+              <div class="gap10"></div>
+            </div>
+          </div>
+
+          <!-- Absences -->
+          <div *ngIf="IsPersonSelected" class="controls-area">
+            <label><b><span i18n>Scheduled absences</span></b></label>
+            <table>
+              <tr>
+                <td>
+                  <mat-datepicker-toggle [for]="scheduledAbsencesDatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #scheduledAbsencesDatepicker></mat-datepicker>
+                </td>
+                <td>
+                  <input matInput name="scheduledAbsenceDate" [(ngModel)]="ScheduledAbsenceToAdd" [matDatepicker]="scheduledAbsencesDatepicker">
+                </td>
+                <td>
+                  <button mat-button color="primary" class="float-right" (click)="AddScheduledAbsence()">
+                    <mat-icon>add</mat-icon><span i18n>Add date</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+            <ul>
+              <li *ngFor="let date of SelectedPerson.ScheduledAbsences">
+                <button mat-button (click)="RemoveScheduledAbsence(date)"><mat-icon>delete_forever</mat-icon></button> {{date}}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Add/Save Actions -->
+          <div class="controls-area">
+            <table class="w100">
+              <tr class="w100">
+                <td class="w50">
+                  <button mat-button (click)="CreateNewPerson()">
+                    <mat-icon>add</mat-icon> <span class="ml5" i18n>Add</span>
+                  </button>
+                </td>
+                <td class="w50">
+                  <button mat-raised-button color="primary" class="display-block w100" (click)="AddOrUpdatePerson()">
+                    <mat-icon>save</mat-icon><span class="ml5" i18n>Save</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+
+    <div class="col-8">
+      <h3 i18n>Persons already entered</h3>
+      <table class="data-table">
+        <tr>
+          <th></th>
+          <th><span i18n>Id</span></th>
+          <th><span i18n>Name</span></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let person of Persons" [ngClass]="{'selected': SelectedPerson.Id == person.Id}">
+          <td>
+            <button mat-button (click)="SelectPerson(person)">
+              <mat-icon>select_all</mat-icon>
+            </button>
+          </td>
+          <td>{{person.Id}}</td>
+          <td>{{person.Name}}</td>
+          <td>
+            <button mat-button (click)="DeletePerson(person)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
