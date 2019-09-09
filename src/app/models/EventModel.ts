@@ -9,12 +9,12 @@ export class EventModel {
   Id: number;
   Name: string;
   IsPeriodic: boolean;
-  Rate: string;
-  constructor(id: number = null, name: string = null, isPeriodic: boolean = true, rate: string = 'weekly') {
+  Frequency: string;
+  constructor(id: number = null, name: string = null, isPeriodic: boolean = true, frequency: string = 'weekly') {
     this.Id = id;
     this.Name = name;
     this.IsPeriodic = isPeriodic;
-    this.Rate = rate;
+    this.Frequency = frequency;
   }
 }
 
@@ -29,7 +29,7 @@ export class EventModelAdapter implements IAdapter<EventModel> {
       sourceObj.Id,
       sourceObj.Name,
       sourceObj.IsPeriodic,
-      sourceObj.Rate
+      sourceObj.Frequency
     );
   }
 }
