@@ -11,12 +11,28 @@
             <input matInput i18n-placeholder placeholder="Name" name="name" [(ngModel)]="SelectedEvent.Name">
           </mat-form-field>
 
-          <mat-checkbox name="is_periodic" [(ngModel)]="SelectedEvent.IsPeriodic" class="w100">
-            <span i18n>Is Periodic</span>
-          </mat-checkbox>
+          <div class="controls-area">
+            <table class="w100">
+                <tr class="w100">
+                  <td class="w50">
+                      <mat-checkbox name="is_periodic" [(ngModel)]="SelectedEvent.IsPeriodic" class="w100">
+                          <span i18n>Is Periodic</span>
+                        </mat-checkbox>
+                  </td>
+                  <td class="w50">
+                      <mat-form-field *ngIf="SelectedEvent.IsPeriodic">
+                        <mat-label i18n>Frequency</mat-label>
+                        <mat-select [(value)]="SelectedEvent.Frequency">
+                          <mat-option *ngFor="let frequency of SelectedEvent.Frequencies" [value]="frequency.Id">
+                            {{frequency.Name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+          </div>
 
-          
-          
           <div class="gap20"></div>
 
           <!-- Add/Save Actions -->

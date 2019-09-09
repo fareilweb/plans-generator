@@ -30,7 +30,7 @@
               <tr>
                 <td>
                   <mat-form-field>
-                      <mat-label>Available Tasks</mat-label>
+                      <mat-label i18n>Available Tasks</mat-label>
                       <mat-select [(value)]="TaskToAddId">
                         <mat-option *ngFor="let task of AvailableTasks" [value]="task.Id">
                           {{task.Name}}
